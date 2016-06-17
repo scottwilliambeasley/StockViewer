@@ -27,7 +27,7 @@ public class StockListPanel extends JPanel implements ActionListener{
 	private StockListListener stockListListener;
 	private RemoveStockButtonListener removeListener;
 	private JScrollPane scrollPane;
-	
+
 	public StockListPanel(){
 		setPanelPreferencesAndLayout();
 		configureStockList();
@@ -54,7 +54,7 @@ public class StockListPanel extends JPanel implements ActionListener{
 
 	private void setPanelPreferencesAndLayout() {
 		setPreferredSize(new Dimension(50,50));
-		setLayout(new BorderLayout());		
+		setLayout(new BorderLayout());
 		setBorder();
 	}
 
@@ -62,7 +62,7 @@ public class StockListPanel extends JPanel implements ActionListener{
 		listModel = new DefaultListModel<String>();
 		stockList = new JList<>();
 		stockList.setModel(listModel);
-		
+
 		stockList.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -78,13 +78,13 @@ public class StockListPanel extends JPanel implements ActionListener{
 					stockListListener.displayStockHistoryOnDisplayPanel(stockTicker);
 				}
 			}
-			
+
 		});
 
 	}
 
-	private void setBorder() { 
-		Border border = BorderFactory.createLineBorder(Color.ORANGE);
+	private void setBorder() {
+		Border border = BorderFactory.createTitledBorder("Stock List Panel");
 		setBorder(border);
 	}
 
@@ -94,22 +94,22 @@ public class StockListPanel extends JPanel implements ActionListener{
 
 	public boolean getStockExistenceInStockList(String stock) {
 		int indexNumberOfStock = listModel.indexOf(stock);
-		
+
 		if (indexNumberOfStock == -1){
 			return false;
 		}else{
 			return true;
 		}
-		
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton sourceButton = (JButton) e.getSource();
 		if (sourceButton == removeStockButton){
-		
+
 			int selectedIndex = stockList.getSelectedIndex();
-			if (selectedIndex != -1){ 
+			if (selectedIndex != -1){
 				removeListener.removeStock(stockList.getSelectedValue());
 				listModel.remove(selectedIndex);
 			}
@@ -131,5 +131,5 @@ public class StockListPanel extends JPanel implements ActionListener{
 			RemoveStockButtonListener removeStockButtonListener) {
 		removeListener = removeStockButtonListener;
 	}
-	
+
 }

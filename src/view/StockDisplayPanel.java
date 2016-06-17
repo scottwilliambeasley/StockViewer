@@ -23,18 +23,17 @@ public class StockDisplayPanel extends JScrollPane{
 	JPanel panel;
 	JViewport viewport;
 	GridBagConstraints gbc;
-	
+
 	public StockDisplayPanel() {
 		setViewportBorderProperties();
 		viewport = getViewport();
 	}
 
 	private void setViewportBorderProperties() {
-		Border border = BorderFactory.createLineBorder(Color.CYAN);
+		Border border = BorderFactory.createTitledBorder("Stock Display Panel");
 		setBorder(border);
-		setViewportBorder(border);
 	}
-	
+
 	public void showStockHistory(OHLCDataset dataset, String stockName) {
 		ChartPanel chartPanel = createFullyCustomizedChartPanel(dataset, stockName);
 		getViewport().add(chartPanel);
@@ -42,14 +41,14 @@ public class StockDisplayPanel extends JScrollPane{
 	}
 
 	private ChartPanel createFullyCustomizedChartPanel(OHLCDataset dataset, String stockName) {
-		JFreeChart candleChart = ChartFactory.createCandlestickChart("History of " + stockName, "Date", "Stock Points", dataset, true);		
+		JFreeChart candleChart = ChartFactory.createCandlestickChart("History of " + stockName, "Date", "Stock Points", dataset, true);
 		ChartPanel chartPanel = customizeChartColorAndFunctionality(candleChart);
-		
+
 		return chartPanel;
 	}
 
 	private ChartPanel customizeChartColorAndFunctionality(JFreeChart candleChart) {
-		customizePlotOfChart(candleChart);	
+		customizePlotOfChart(candleChart);
 		ChartPanel chartPanel = makeMouseZoomableChartPanel(candleChart);
 
 		return chartPanel;
@@ -91,16 +90,16 @@ public class StockDisplayPanel extends JScrollPane{
 		CandlestickRenderer x = new CustomCandlestickRenderer();
 							x.setUpPaint(new Color(0, 100, 0));
 							x.setAutoWidthMethod(CandlestickRenderer.WIDTHMETHOD_SMALLEST);
-							
+
 		plot.setRenderer(x);
 	}
 
 	private XYPlot setPannablePlot(XYPlot plot) {
 			   plot.setDomainPannable(true);
 			   plot.setRangePannable(true);
-		
+
 		return plot;
 	}
-	
+
 }
 
